@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello Web</title>
+</head>
+<body>
+	<h1>HelloWeb</h1>
+	
+	<h2>Servlet</h2>
+	<!--
+		context
+			- 어플리케이션 동작 환경
+		
+		contextPath
+			- 어플리케이션 접근 경로
+			
+		클라이언트에서 절대주소 방식으로 url 작성시 contextPath부터 작성하여야 함
+		
+		절대경로방식 : '/'로 시작, localhost:port 뒷부분에 작성한 절대경로가 붙으며 요청
+		상대경로방식 : 문구로 시작, 현재 페이지가 보여질 때 url경로 중 마지막 /로부터 그 뒤 작성한 상대경로가 붙으며 요청
+	-->
+	<ul>
+		<li><a href="/hello/servlet/testPerson1.html">개취검사 - GET | POST</a></li>
+        <li><a href="/hello/servlet/testPerson2.html">개취검사 - jsp</a></li>
+        <li><a href="/hello/menu/menu.jsp">@실습문제 - menu</a></li>
+	</ul>
+</body>
+</html>
