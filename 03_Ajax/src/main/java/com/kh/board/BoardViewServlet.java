@@ -1,9 +1,6 @@
 package com.kh.board;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,33 +11,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/board/list")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/board/view")
+public class BoardViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public BoardListServlet() {
+    public BoardViewServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
 		HttpSession session = request.getSession();
-		List<Map<String, Object>> list;
-		if(session.getAttribute("list") == null) {
-			list = new ArrayList<>();
-			for(int i=0; i<5; i++) {
-				Map<String, Object> board = new HashMap<>();
-				board.put("bno", i+1);
-				board.put("title", "kh게시판" + (i+1)+"번글");
-				board.put("writer", "admin");
-				board.put("createDate", new Date());
-				board.put("content", "testtestcontent");
-				
-				list.add(board);
+		
+		List<Map<String, Object>> list = (List)session.getAttribute("list");
+		Map<String,Object> b= list.stream().filter((board) -> {
+			int no = (int) board.get("bno");
+			if(bno == no) {
+				return true;
 			}
-			session.setAttribute("list", list);
-		}
-		request.getRequestDispatcher("/board/list.jsp").forward(request, response);
+			return false;
+		}).findAny().orElse(null);
+		
+		request.setAttribute("board", b);
+		request.getRequestDispatcher("/board/view.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

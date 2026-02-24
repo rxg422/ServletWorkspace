@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 게시글 목록 페이지 -->
 <h2>일반게시판</h2>
 <table class='list-table'>
@@ -13,15 +14,15 @@
 	</thead>
 	<tbody>
 		<!-- 반복문으로 등록된 게시글들를 출력하는곳입니다. -->
-		<tr>
-			<td>1</td>
-			<td>test11</td>
-			<td>123</td>
-			<td>2026-02-01</td>
-		</tr>
+		<c:forEach items="${list}" var="board">
+			<tr class="board">
+				<td>${board.bno}</td>
+				<td>${board.title}</td>
+				<td>${board.writer}</td>
+				<td>${board.createDate}</td>
+			</tr>
+		</c:forEach>
 	</tbody>
 </table>
-
-
 
 
